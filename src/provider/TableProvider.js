@@ -26,8 +26,9 @@ function TableProvider({children}) {
         } )
         .catch(err => console.log(err))  
     }, [pageData]) 
-    useEffect(() => {   
+    useEffect(() => {  
         setColumnHandled(columns ? columns.filter(e => !columnSearch.includes(e)) : [])   
+        // eslint-disable-next-line
     }, [columnSearch])
     const value = {
         columns,
