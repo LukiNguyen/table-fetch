@@ -1,0 +1,62 @@
+ body {
+     background-color: #202125
+ }
+ ::-webkit-scrollbar {
+    width: 9px;
+    height: 9px;
+      background-color: transparent;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+      background-color: transparent;
+    border-radius: 90px; 
+    cursor: pointer;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {  
+      background-color: #464649 ;
+    border-radius: 90px; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background:#a4a7b3; 
+  }
+ ul {
+     list-style-type: none;
+ }
+ input {
+     border:none;
+     outline:none;
+     border-radius:10px;  
+     min-width: 250px;
+ }
+ .search-box {
+     background-color:#57585c;
+     
+     border-radius: 15px; 
+ } 
+ ul.tag li {
+    background: #2f303436;
+    color: #fff;
+    padding: 5px 15px;
+    height: 30px; 
+    border-radius: 20px;
+    width: auto;
+    font-size: 12px;
+    text-align: center;
+    margin-right: 10px;
+    transition: .2s;
+    cursor: pointer;
+ }
+ ul.tag li:hover,ul.tag li.active {
+     background: #34d465;
+ }
+ .MuiPagination-ul { 
+    justify-content: center;
+ }
+ .MuiButtonBase-root {
+     color:#fff !important;
+ }
