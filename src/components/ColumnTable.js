@@ -75,6 +75,7 @@ function ColumnInTable(props) {
                 else {
                     return false;
                 }
+                // eslint-disable-next-line
             },), 
             (tableContext.dataStorage ? searchData(tableContext.dataStorage, searchFiller,tableContext.keySearch) :'').map((row,index) =>  
                 <tr className={style.rowData} key={index}>
