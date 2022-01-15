@@ -5,15 +5,21 @@ import IconButton from '@mui/material/IconButton';
 import ArrowCircleUpIcon from '@mui/icons-material/ArrowCircleUp';
 import ArrowCircleDownIcon from '@mui/icons-material/ArrowCircleDown';
 import { reName } from '../extensions/reNameData' 
+import { searchData } from '../extensions/searchData'
 function ColumnInTable(props) { 
     const tableContext = useContext(TableContext) 
     const [sort,setSort] = useState('ascending')
     const [targetSort, setTargetSort] = useState(0) 
-
-    // Convert Object {} to Array => sort by Index
+    const [searchFiller, setSearchFillter ] =useState([ ]) /** SORT ALLOW FILLTER */
     const convertHandle = (obj) => {
         return Object.entries(obj)
     }     
+    // Name Column for Search
+    setSearchFillter(['title'])
+    React.useEffect(() => {
+        // Test search
+        console.log(tableContext.dataStorage ? searchData(tableContext.dataStorage, searchFiller,tableContext.keySearch) :'')
+    },[searchFiller,tableContext.dataStorage,tableContext.keySearch])
     return (
         <>  
         {
@@ -50,7 +56,7 @@ function ColumnInTable(props) {
         </tr> 
         {
             tableContext.dataStorage.sort(function (a, b) {  
-                if (sort ==='descending') {  
+                if (sort ==='descending') {   
                     if(typeof(convertHandle(a)[targetSort][1]) === "number" ) {
                         return convertHandle(a)[targetSort][1] - convertHandle(b)[targetSort][1]
                     }
@@ -69,13 +75,17 @@ function ColumnInTable(props) {
                 else {
                     return false;
                 }
-            },).map((row,index) =>  
+            })
+            (tableContext.dataStorage ? searchData(tableContext.dataStorage, searchFiller,tableContext.keySearch) :'').map((row,index) =>  
                 <tr className={style.rowData} key={index}>
                     {      
                         <td className='text-left' >
                             <div className={`${style.formatText} px-3 py-3 text-start`}> 
-                                {tableContext.dataStorage[index] ?  reName(convertHandle(tableContext.dataStorage[index])[props.index][1]) : ''}
-                                
+                                {   
+                                    tableContext.dataStorage[index] ?  
+                                    reName(convertHandle(row)[props.index][1]) : 
+                                    ''
+                                }
                             </div>
                         </td>  
                     }

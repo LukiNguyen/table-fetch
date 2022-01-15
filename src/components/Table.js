@@ -5,9 +5,9 @@ import Paginations from './Paginations'
 import ExportExcel from './ExportExcel'
 import Switch from './Switch'
 import DragColum from '../extensions/dragColumn'
+// import DataInTable from './DataInTable'
 function Table() { 
-    const tableContext = useContext(TableContext) 
-    // console.log(tableContext.dataStorage )
+    const tableContext = useContext(TableContext)  
     const column =  tableContext.dataStorage[0] && Object.keys(tableContext.dataStorage[0]) 
     return (
         <div className="container-fluid rounded-3 mt-2 py-3 px-5" >
@@ -15,8 +15,8 @@ function Table() {
             <div className="row">
                 <div className="col-sm-9">
                     <Search column = {column}/> 
-                    {/* <DataInTable data={search(data)} />  */}  
-                    <DragColum numberItems={ !tableContext.columnsHandled.length ? (tableContext.dataStorage[0] && Object.keys(tableContext.dataStorage[0]).length) : tableContext.columnsHandled.length} />   
+                    {/* <DataInTable data={ tableContext.dataStorage } />  */}
+                    <DragColum numberItems={ (tableContext.columns.filter(val => !tableContext.columnSearch.includes(val))).length } />   
                     <Paginations /> 
                 </div>
                 <div className="col-sm-3 d-flex flex-column">

@@ -1,7 +1,7 @@
-import React, {useContext } from 'react'
+import React, {useContext,useState } from 'react' 
 import { TableContext } from '../provider/TableProvider'
-function Search(props) {
-    const tableContext = useContext(TableContext)
+function Search() {
+    const tableContext = useContext(TableContext)  
     return (
         <>
         <div className="d-flex mb-5 px-5 py-3 search-box">
@@ -10,25 +10,10 @@ function Search(props) {
                 placeholder="Search"
                 type='text' 
                 onChange={(e) => {
-                    tableContext.setKeySearch(e.target.value)
-                    console.log(tableContext.keySearch)
+                    tableContext.setKeySearch(e.target.value) 
                 }} 
-                value={tableContext.keySearch}  />
-                <div className="layout-ul overflow-auto py-2">
-            <ul className="d-flex align-items-center mb-0 tag">
-                {
-                    props.column && 
-                    props.column.map((columnName,index) => 
-                        <li key={index} onClick={(e) => {
-                            tableContext.setColumnSearch(prev => [...prev, e.target.textContent]) 
-                            console.log(tableContext.columnSearch)
-                        } 
-                        }>
-                            {columnName}
-                        </li>)
-                } 
-            </ul>
-            </div>
+                value={tableContext.keySearch}  
+        /> 
         </div>
         </>
     )

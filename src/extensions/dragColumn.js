@@ -1,28 +1,13 @@
 import React, { Component } from 'react'; 
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import ColumnTable from '../components/ColumnTable'
-// fake data generator
-
-const getItems = count =>
-  Array.from({ length: count }, (v, k) => k).map(k => ({ 
-    id: `${k}`,  
-  }));
-
-// a little function to help us with reordering the result
-const reorder = (list, startIndex, endIndex) => {
-  const result = Array.from(list);
-  const [removed] = result.splice(startIndex, 1);
-  result.splice(endIndex, 0, removed); 
-  return result;
-};
- 
+import {reOrder} from '../extensions/reOrder'
+import { fakeData } from '../extensions/fakeData' 
 
 const getItemStyle = (isDragging, draggableStyle) => ({ 
-  userSelect: 'none',   
-  // change background colour if dragging
+  userSelect: 'none',    
   backgroundColor: isDragging ? 'transparent' : 'transparent', 
-  flexFlow: 'wrap', 
-  // styles apply on draggables
+  flexFlow: 'wrap',  
   ...draggableStyle,
 });
 
@@ -36,22 +21,17 @@ export class dragList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: getItems(this.props.numberItems),
+      items: fakeData(36),
     };
     this.onDragEnd = this.onDragEnd.bind(this); 
-  }    
-  componentWillReceiveProps(newProps) {     
-    this.setState({
-        items: getItems(newProps.numberItems),
-      });
- } 
+  }   
   onDragEnd(result) {
     // dropped outside the list
     if (!result.destination) {
       return;
     }
 
-    const items = reorder(
+    const items = reOrder(
       this.state.items,
       result.source.index,
       result.destination.index

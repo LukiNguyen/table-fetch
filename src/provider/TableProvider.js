@@ -1,47 +1,33 @@
-import React, { useState ,  createContext,useEffect,useLayoutEffect} from 'react' 
-import axios from 'axios'   
+import React, { useState ,  createContext,useLayoutEffect} from 'react' 
+import axios from 'axios'    
 const TableContext = createContext() 
 function TableProvider({children}) { 
-    const [dataStorage, setDataStorage] = useState([])
-    const columns =  dataStorage[0] && Object.keys( dataStorage[0])
+    const [dataStorage, setDataStorage] = useState([]) 
     const [keySearch, setKeySearch] = useState('')  
     const [pageData, setPageData] = useState(1)
-    const [columnSearch, setColumnSearch] = useState(columns ? columns : [])
-    const [columnsHandled, setColumnHandled] = useState([])
-    const search = (row) => { 
-        return row.filter((row) => 
-            columnSearch.some(
-                    (columnFilter) => row[columnFilter].toString().toLowerCase().indexOf(keySearch.toLowerCase()) > -1
-            )
-        ); 
-    }   
-
+    const columns =  dataStorage[0] ? Object.keys( dataStorage[0]) : [] 
+    const [columnSearch, setColumnSearch] = useState([])    
     useLayoutEffect(() => { 
         axios.post('http://o-research-dev.orlab.com.vn/api/v1/filters/filter/', {
             "page": pageData,
             "pageSize": 5
         })
-        .then(res => {  
-            setDataStorage(res.data.data)
-        } )
+        .then(res => {     
+            setDataStorage(res.data.data) 
+        })
         .catch(err => console.log(err))  
-    }, [pageData]) 
-    useEffect(() => {  
-        setColumnHandled(columns ? columns.filter(e => !columnSearch.includes(e)) : [])   
-        // eslint-disable-next-line
-    }, [columnSearch])
+    }, [pageData])  
+
     const value = {
         columns,
         dataStorage,
-        setDataStorage,
+        setDataStorage, 
         keySearch,
         setKeySearch,
-        columnsHandled,
         columnSearch,
         setColumnSearch,
         pageData,
-        setPageData,
-        search
+        setPageData, 
     }
     return (
         <TableContext.Provider value={value}> 

@@ -4,14 +4,11 @@ import IconButton from '@mui/material/IconButton';
 import ArrowCircleUpIcon from '@mui/icons-material/ArrowCircleUp';
 import ArrowCircleDownIcon from '@mui/icons-material/ArrowCircleDown';
 import { reName } from '../extensions/reNameData' 
+import {convertHandle } from '../extensions/convertHandle'
 function DataInTable({data}) { 
     const columns = data[0] && Object.keys(data[0])
     const [sort,setSort] = useState('ascending')
-    const [targetSort, setTargetSort] = useState(0) 
-    // Convert Object {} to Array => sort by Index
-    const convertHandle = (obj) => {
-        return Object.entries(obj)
-    } 
+    const [targetSort, setTargetSort] = useState(0)  
     return (
         <>
             <table  
