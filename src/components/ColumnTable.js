@@ -14,12 +14,12 @@ function ColumnInTable(props) {
     const convertHandle = (obj) => {
         return Object.entries(obj)
     }     
-    // Name Column for Search
-    setSearchFillter(['title'])
     React.useEffect(() => {
-        // Test search
+        // Name Column Search
+        setSearchFillter(['title'])
+        //Test search
         console.log(tableContext.dataStorage ? searchData(tableContext.dataStorage, searchFiller,tableContext.keySearch) :'')
-    },[searchFiller,tableContext.dataStorage,tableContext.keySearch])
+    },[searchFiller,tableContext.keySearch,tableContext.dataStorage])
     return (
         <>  
         {
@@ -75,7 +75,7 @@ function ColumnInTable(props) {
                 else {
                     return false;
                 }
-            })
+            },), 
             (tableContext.dataStorage ? searchData(tableContext.dataStorage, searchFiller,tableContext.keySearch) :'').map((row,index) =>  
                 <tr className={style.rowData} key={index}>
                     {      
