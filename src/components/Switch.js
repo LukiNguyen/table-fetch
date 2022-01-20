@@ -88,7 +88,8 @@ export default function UnstyledSwitches(props) {
         onChange= {()=> { 
           const items = tableContext.columnSearch.find(item => item ===props.title);  
           items &&  tableContext.setColumnSearch(tableContext.columnSearch.filter((item) => item  !== props.title)); 
-          !items && tableContext.setColumnSearch(prev => [...prev,props.title])   
+          !items && tableContext.setColumnSearch(prev => [...prev,props.title])  
+          tableContext.setSearchFillter(tableContext.searchFiller.filter(val => !tableContext.columnSearch.includes(val))) 
         }}
       /> 
       <p className="mb-0" style={{color:"#fff"}}>{props.title}</p>
