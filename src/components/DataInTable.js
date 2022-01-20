@@ -17,9 +17,7 @@ function DataInTable({data}) {
     const [columns, setColumns] = useState(data[0] && Object.keys(data[0]));
     useEffect(()=> {
         setColumns(data[0] && Object.keys(data[0]) )
-    },[data])
-    console.log(columns)
-    const [rows, setRows] = useState(data);
+    },[data]) 
     const [dragOver, setDragOver] = useState("");
 
     const handleDragStart = e => {
